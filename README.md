@@ -92,9 +92,22 @@ Relationships:
 * Session: event relationship; speakers relationship (many-to-many)
 * Speaker: bio relationship; sessions relationship (many-to-many)
 
+### API endpoints
+
+* `GET /events` lists events.
+* `GET /events/<id>/sessions` lists an event's sessions.
+* `GET /speakers` lists speakers.
+* `GET /speakers/<id>` returns a speaker and their bio, or `"No bio available"`.
+* `GET /sessions/<id>/speakers` lists a session's speakers and bios.
+
+Unknown event, speaker, or session IDs return a JSON error with a `404` status.
+
 Cascading:
 * If an `Event` is deleted, its `Sessions` should also be deleted.
 * If a `Speaker` is deleted, their `Bio` should be deleted.
+
+To create the schema and load the sample records, run `flask db upgrade head`
+and `python seed.py` from `server/`.
 
 ### Task 3: Develop, Test, and Refine the Code
 
